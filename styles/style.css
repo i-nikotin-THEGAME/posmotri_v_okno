@@ -102,6 +102,8 @@ ol {
   display: flex;
   gap: 5px;
   width: fit-content;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-form__label-text {
@@ -193,11 +195,28 @@ ol {
   color: #545050;
 }
 
+/* Комментарии что в первой итерации, что во второй итерации одинаковы. 
+Оба раза мне так и не стало понятно в чем ошибка или недостаток кода, 
+т.к. шорткат (в первой итерации) скрывал переполнение по горизонтали, 
+и overflow-x (во второй итерации) тоже скрывает переполнение по горизонтали.
+
+И при просмотре результата страницы в браузерах на macOS (Safari, Firefox, 
+Google Chrome или Yandex Browse) появления горизонтального скрола не наблюдалось, 
+а размеры списка и элемнтов списка мной так же установлены. 
+
+Затем я перечитал чек-лист к практическому заданию и в разделе "Хорошие практики" нашел такой пункт: 
+Вместо overflow: scroll использован overflow: auto, чтобы не отображался ненужный скролл. 
+
+Если Ваши замечания - попытка добиться от меня в коде в свойставх  overflow (overflow-x) значение auto,
+то комментарий не очевиден. 
+
+Если же моя докадка не верна, то прошу написать комментарий другими словами. 
+Буду благодарен если к коментарию будут ссылки на доп материал, 
+который подробнее опишет нужные мне знания для успешного выполнения задания.*/
 .content__list {
   position: relative;
   height: 298px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: auto;
 }
 
 .content__list-item:not(:last-child) {
@@ -220,10 +239,17 @@ ol {
   justify-content: space-between;
 }
 
+/* Не считаю свойство overflow лишним. Добавил свойство overflow на случай заполнения описания карточки больше  чем на 4 строки*/
 .content__video-card-description-container {
   width: fit-content;
   max-height: 103px;
-  overflow: scroll;
+  overflow: auto;
+}
+
+/* Дообавил этот селектор, т.к. в Googl Crome Firefox контейнер с описанием карточки и контейнер со списокм карточек наделяется обводкой по умолчанию*/
+.content__video-card-description-container:focus-visible,
+.content__list:focus-visible {
+  outline: 1px solid #FFFFFF;
 }
 
 .content__video-card-title {
@@ -260,9 +286,8 @@ ol {
   margin: 2px;
 }
 
-:where(
-  .button, 
-  .search-form__checkbox-list .search-form__label, 
+:where(.button,
+  .search-form__checkbox-list .search-form__label,
   .content__card-link):hover {
   text-decoration: underline;
   text-decoration-skip-ink: none;
